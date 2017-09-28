@@ -1,8 +1,12 @@
 package com.myapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,8 +35,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String processLogin(@ModelAttribute("user") User user ,Model userModel){
-		userService.validateUser(user);
+	public String processLogin(@ModelAttribute("user") @Valid User user , BindingResult bindingResult,Model userModel){
+		if((bindingResult.hasFieldErrors("email") || bindingResult.hasFieldErrors("password")) && !userService.validateUser(user))
+		{
+			userModel.addAttribute("hasErrors", "form has errors");
+			return "login";
+		}
 		userModel.addAttribute("username",user.getUsername());
 		return "loginSuccess";
 	}
@@ -45,7 +53,7 @@ public class UserController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String processRegistration(@ModelAttribute("user") User user,Model userModel){
-		userService.insertUser(user);
+		userService.insertUser(user); 
 		userModel.addAttribute("username",user.getUsername());
 		return "registerSuccess";
 	}

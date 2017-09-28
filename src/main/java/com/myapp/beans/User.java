@@ -1,7 +1,30 @@
 package com.myapp.beans;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 public class User {
-	private String username,email,password,firstName,lastName,phone;
+	
+	@NotNull
+	@Size(min=3, max=20)
+	private String username;
+	@NotNull
+	@Email
+	private String email;
+	@NotNull
+	@Size(min=3, max=20)
+	private String password;
+	@NotNull
+	@Size(min=3, max=20)
+	private String firstName;
+	@NotNull
+	@Size(min=3, max=20)
+	private String lastName;
+	@NotNull
+	@Size(min=10,max=10)
+	private String phone;
 
 	public String getUsername() {
 		return username;

@@ -24,13 +24,14 @@ public class UserServiceImpl implements UserService{
 	public boolean validateUser(User user) {
 		// TODO Auto-generated method stub
 		System.out.println("Validating user service");
-		userDao.validateUser(user);
-		return false;
+		return userDao.validateUser(user);
 	}
 
 	@Override
 	public int insertUser(User user) {
-		return userDao.insertUser(user);
+		int rowsUpdated = userDao.insertUser(user);
+		System.out.println(rowsUpdated);
+		return rowsUpdated;
 	}
 
 }

@@ -11,10 +11,12 @@
             <tr>
                <td><form:label path = "email">Email</form:label></td>
                <td><form:input path = "email" /></td>
+               <td><form:errors path = "email"></form:errors>
             </tr>
             <tr>
                <td><form:label path = "password">Password</form:label></td>
                <td><form:input path = "password" /></td>
+               <td><form:errors path = "password"></form:errors>
             </tr>
             <tr>
                <td colspan = "2">
