@@ -3,11 +3,11 @@
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <html>
    <head>
-      <title>Spring MVC Form Handling</title>
+      <title>Welcome User</title>
    </head>
 
    <body>
-      <h2>Logged in! as ${email}</h2>
+      <h2>Logged in! as ${user.firstName}</h2>
    </body>
    
 </html>

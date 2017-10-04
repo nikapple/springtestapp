@@ -26,6 +26,19 @@ public class User {
 	@Size(min=10,max=10)
 	private String phone;
 
+	public User(){
+		
+	}
+	
+	public User(String username, String email, String firstname, String lastname,
+			String phone) {
+		this.username = username;
+		this.email = email;
+		this.firstName = firstname;
+		this.lastName = lastname;
+		this.phone = phone;
+	}
+
 	public String getUsername() {
 		return username;
 	}

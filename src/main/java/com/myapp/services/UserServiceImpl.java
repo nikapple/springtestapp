@@ -22,16 +22,22 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean validateUser(User user) {
-		// TODO Auto-generated method stub
-		System.out.println("Validating user service");
 		return userDao.validateUser(user);
 	}
 
 	@Override
 	public int insertUser(User user) {
-		int rowsUpdated = userDao.insertUser(user);
-		System.out.println(rowsUpdated);
-		return rowsUpdated;
+		return userDao.insertUser(user);
+	}
+
+	@Override
+	public boolean checkUserExists(User user) {
+		return userDao.checkUserExists(user);
+	}
+
+	@Override
+	public User getUserInfo(User user) {
+		return userDao.getUserInfo(user);
 	}
 
 }
