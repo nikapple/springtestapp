@@ -1,8 +1,11 @@
 package com.myapp.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myapp.beans.Book;
 import com.myapp.beans.User;
 import com.myapp.dao.UserDao;
 
@@ -38,6 +41,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserInfo(User user) {
 		return userDao.getUserInfo(user);
+	}
+
+	@Override
+	public List<Book> getAssignedBooks(User user) {
+		return userDao.getAssignedBooks(user);
 	}
 
 }

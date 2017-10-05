@@ -1,6 +1,8 @@
 package com.myapp.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -10,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.myapp.beans.Book;
 import com.myapp.beans.User;
 
 @Repository
@@ -102,6 +105,24 @@ public class UserDaoImpl implements UserDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Book> getAssignedBooks(User user) {
+		String sql = "SELECT t.name as topic, b.name as bookName, b.author as author FROM activity a,book b ,topic t, user u WHERE a.book_id=b.id AND b.topic_id=t.id AND a.user_id=u.id AND u.username=:username";
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("username", user.getUsername());
+		List<Book> bookList = new ArrayList<>();
+
+		List<Map<String,Object>> rows = getJdbcTemplate().queryForList(sql, parameters);
+		for (Map<String,Object> row : rows) {
+			Book book = new Book();
+			book.setTopic((String)(row.get("topic")));
+			book.setName((String)row.get("bookName"));
+			book.setAuthor((String)row.get("author"));
+			bookList.add(book);
+		}
+		return bookList;
 	}
 
 }
