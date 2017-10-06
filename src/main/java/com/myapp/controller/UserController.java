@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.myapp.beans.Book;
@@ -89,6 +91,15 @@ public class UserController {
 			return "userHome";
 		}
 		return "error";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/book", method = RequestMethod.GET)
+	public String updateBookCompletion(@RequestParam String bookName, Model model,HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+		int numRows = userService.updateBookCompletion(user,bookName);
+		return (numRows == 1)?"true":"false";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

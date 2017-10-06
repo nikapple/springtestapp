@@ -1,6 +1,7 @@
 package com.myapp.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +124,16 @@ public class UserDaoImpl implements UserDao {
 			bookList.add(book);
 		}
 		return bookList;
+	}
+
+	@Override
+	public int updateBookCompletion(User user, String bookName) {
+		String sql = "UPDATE activity a,user u,book b SET a.completion_date = :completionDate WHERE u.username=:username AND u.id = a.user_id AND b.name=:bookname AND b.id = a.book_id";
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("username", user.getUsername());
+		parameters.put("completionDate", new Date());
+		parameters.put("bookname", bookName);
+		return jdbcTemplate.update(sql, parameters);
 	}
 
 }

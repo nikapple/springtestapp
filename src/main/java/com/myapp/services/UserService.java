@@ -12,4 +12,5 @@ public interface UserService {
 	boolean checkUserExists(User user);
 	User getUserInfo(User user);
 	List<Book> getAssignedBooks(User user);
+	int updateBookCompletion(User user, String bookName);
 }

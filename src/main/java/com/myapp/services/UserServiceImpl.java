@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.getAssignedBooks(user);
 	}
 
+	@Override
+	public int updateBookCompletion(User user, String bookName) {
+		return userDao.updateBookCompletion(user,bookName);
+	}
+
 }
